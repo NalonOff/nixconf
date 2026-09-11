@@ -7,5 +7,6 @@
     ./locale.nix
     ./nix-settings.nix
     ./security.nix
+    ./vm-test-build.nix
   ];
 }
