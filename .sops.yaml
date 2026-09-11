@@ -1,0 +1,8 @@
+keys:
+  - &admin_nalon age1qg6pzdtg3ezq2mk59ghmd7uc5gyyuwws34m2am9a33kqfahdjscszj2s54
+
+creation_rules:
+  - path_regex: secrets/.*\.yaml$
+    key_groups:
+      - age:
+          - *admin_nalon
