@@ -3,6 +3,7 @@
   imports = [
     ../../modules/nixos
     ./hardware-configuration.nix
+    ./disko.nix
   ];
 
   sops = {

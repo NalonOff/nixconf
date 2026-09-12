@@ -13,9 +13,14 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, disko, ... }:
     let
       system = "x86_64-linux";
       vars = import ./vars.nix;
@@ -28,6 +33,7 @@
             ./hosts/${hostname}
             ./modules/nixos
             sops-nix.nixosModules.sops
+            disko.nixosModules.disko
             home-manager.nixosModules.home-manager
             {
               networking.hostName = hostname;
