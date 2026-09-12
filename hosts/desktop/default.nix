@@ -1,7 +1,6 @@
 { inputs, config, vars, ... }:
 {
   imports = [
-    ../../modules/nixos
     ./hardware-configuration.nix
     ./disko.nix
   ];
