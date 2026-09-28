@@ -9,5 +9,6 @@
     ./security.nix
     ./vm-test-build.nix
     ./tpm.nix
+    ./ssh.nix
   ];
 }
