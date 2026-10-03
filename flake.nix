@@ -18,9 +18,14 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    impermanence = {
+      url = "github:nix-community/impermanence";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, disko, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, disko, impermanence, ... }:
     let
       system = "x86_64-linux";
       vars = import ./vars.nix;
@@ -34,6 +39,7 @@
             ./modules/nixos
             sops-nix.nixosModules.sops
             disko.nixosModules.disko
+            impermanence.nixosModules.impermanence
             home-manager.nixosModules.home-manager
             {
               networking.hostName = hostname;

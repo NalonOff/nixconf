@@ -51,6 +51,11 @@
                     mountpoint = "/nix";
                     mountOptions = [ "compress=zstd" "noatime" ];
                   };
+                  # Explicitly persisted state, surviving the root wipe
+                  "@persist" = {
+                    mountpoint = "/persist";
+                    mountOptions = [ "compress=zstd" "noatime" ];
+                  };
                 };
               };
             };
