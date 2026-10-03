@@ -7,7 +7,8 @@
 
   sops = {
     defaultSopsFile = ../../secrets/user-password.yaml;
-    age.keyFile = "/var/lib/sops-nix/keys.txt";
+    # age.keyFile = "/var/lib/sops-nix/keys.txt";
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
     secrets."password-hash" = {
       neededForUsers = true;
