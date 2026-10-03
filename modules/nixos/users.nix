@@ -11,4 +11,9 @@
   };
 
   programs.zsh.enable = true;
+
+  # Lecture marker lives in /var, wiped every boot
+  security.sudo.extraConfig = ''
+    Defaults lecture=never
+  '';
 }
