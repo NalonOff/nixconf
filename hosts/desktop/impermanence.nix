@@ -57,7 +57,6 @@ in
       "/var/lib/nixos"
       "/var/lib/systemd/coredump"
       "/var/lib/systemd/timers"   # keep timer stamps, avoids catch-up runs at every boot
-      "/etc/ssh"                  # host keys
       "/var/lib/NetworkManager"
     ];
 
