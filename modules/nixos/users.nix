@@ -4,6 +4,7 @@
 
   users.users.${vars.username} = {
     isNormalUser = true;
+    uid = 1000;
     extraGroups = [ "wheel" "networkmanager" "video" "input" ];
     shell = pkgs.zsh;
   };
