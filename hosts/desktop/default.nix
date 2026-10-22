@@ -6,18 +6,8 @@
     ./impermanence.nix
   ];
 
-  sops = {
-    defaultSopsFile = ../../secrets/user-password.yaml;
-    # age.keyFile = "/var/lib/sops-nix/keys.txt";
-    age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
-
-    secrets."password-hash" = {
-      neededForUsers = true;
-    };
-  };
-
   users.mutableUsers = false;
-  users.users.${vars.username}.hashedPasswordFile = config.sops.secrets."password-hash".path;
+  users.users.${vars.username}.hashedPasswordFile = "/persist/secrets/${vars.username}.hash";
 
   home-manager.users.${vars.username} = import ../../modules/home;
 

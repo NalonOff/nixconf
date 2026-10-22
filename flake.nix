@@ -9,11 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,7 +20,7 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, disko, impermanence, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, disko, impermanence, ... }:
     let
       system = "x86_64-linux";
       vars = import ./vars.nix;
@@ -37,7 +32,6 @@
           modules = [
             ./hosts/${hostname}
             ./modules/nixos
-            sops-nix.nixosModules.sops
             disko.nixosModules.disko
             impermanence.nixosModules.impermanence
             home-manager.nixosModules.home-manager

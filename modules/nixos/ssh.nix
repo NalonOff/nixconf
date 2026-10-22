@@ -22,7 +22,7 @@
     '';
   };
 
-  # SSH server config (system-wide). Host keys also feed sops-nix (age identity).
+  # SSH server config (system-wide)
   services.openssh = {
     enable = true;
     openFirewall = lib.mkDefault false;
