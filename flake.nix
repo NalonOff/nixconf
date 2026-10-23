@@ -41,7 +41,6 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = { inherit inputs vars; };
-                sharedModules = [ ./modules/home ];
               };
             }
           ];
