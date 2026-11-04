@@ -4,11 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,7 +15,7 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, disko, impermanence, ... }:
+  outputs = inputs @ { self, nixpkgs, disko, impermanence, ... }:
     let
       system = "x86_64-linux";
       vars = import ./vars.nix;
@@ -34,15 +29,7 @@
             ./modules/nixos
             disko.nixosModules.disko
             impermanence.nixosModules.impermanence
-            home-manager.nixosModules.home-manager
-            {
-              networking.hostName = hostname;
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = { inherit inputs vars; };
-              };
-            }
+            { networking.hostName = hostname; }
           ];
         };
     in
