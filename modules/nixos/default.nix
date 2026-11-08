@@ -10,5 +10,6 @@
     ./tpm.nix
     ./ssh.nix
     ./${vars.gpu}.nix
+    ./audio.nix
   ];
 }
