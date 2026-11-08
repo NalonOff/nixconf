@@ -1,4 +1,4 @@
-{ ... }:
+{ vars, ... }:
 {
   imports = [
     ./boot.nix
@@ -9,5 +9,6 @@
     ./security.nix
     ./tpm.nix
     ./ssh.nix
+    ./${vars.gpu}.nix
   ];
 }
