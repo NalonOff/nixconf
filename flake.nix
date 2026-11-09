@@ -13,9 +13,21 @@
       url = "github:nix-community/impermanence";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    wrappers = {
+      url = "github:nix-community/nix-wrapper-modules";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
+    import-tree.url = "github:denful/import-tree";
   };
 
-  outputs = inputs @ { self, nixpkgs, disko, impermanence, ... }:
+  outputs = inputs @ { nixpkgs, flake-parts, import-tree, wrappers, disko, impermanence, ... }:
     let
       system = "x86_64-linux";
       vars = import ./vars.nix;
@@ -33,8 +45,15 @@
           ];
         };
     in
-    {
-      nixosConfigurations = {
+    flake-parts.lib.mkFlake { inherit inputs; specialArgs = { inherit vars; }; } {
+      imports = [
+        wrappers.flakeModules.wrappers
+        (import-tree ./modules/wrap)
+      ];
+
+      systems = [ "x86_64-linux" ];
+
+      flake.nixosConfigurations = {
         desktop = mkHost "desktop";
       };
     };
