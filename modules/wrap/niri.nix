@@ -12,8 +12,8 @@
       polkitAgent = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
       wallpaper = ../../assets/wallpaper.jpg;
 
-      cursorPackage = pkgs.posy-cursors;
-      cursorTheme = "Posy_Cursor";
+      cursorPackage = pkgs.phinger-cursors;
+      cursorTheme = "phinger-cursors-light";
 
       # Argument-less niri node
       flag = _: { };
@@ -136,6 +136,12 @@
     {
       imports = [ wlib.wrapperModules.niri ];
 
+      env = {
+        XCURSOR_PATH = "${cursorPackage}/share/icons";
+        XCURSOR_THEME = cursorTheme;
+        XCURSOR_SIZE = "32";
+      };
+
       settings = {
         prefer-no-csd = flag;
         hotkey-overlay.skip-at-startup = flag;
@@ -147,7 +153,7 @@
 
         cursor = {
           xcursor-theme = cursorTheme;
-          xcursor-size = 24;
+          xcursor-size = 32;
         };
 
         outputs."DP-1" = {
@@ -159,7 +165,6 @@
           NIXOS_OZONE_WL = "1";
           QT_QPA_PLATFORM = "wayland;xcb";
           GTK_THEME = "Adwaita:dark";
-          XCURSOR_PATH = "${cursorPackage}/share/icons";
         };
 
         layout = {
