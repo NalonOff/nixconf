@@ -2,7 +2,8 @@
 {
   flake.wrappers.kitty = { wlib, pkgs, lib, ... }:
     let
-      zsh = self.packages.${pkgs.stdenv.hostPlatform.system}.zsh;
+      wraps = self.packages.${pkgs.stdenv.hostPlatform.system};
+      inherit (wraps) zsh;
     in
     {
       imports = [ wlib.wrapperModules.kitty ];

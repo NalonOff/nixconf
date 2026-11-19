@@ -2,8 +2,9 @@
 {
   flake.wrappers.zsh = { wlib, pkgs, lib, ... }:
     let
-      starship = self.packages.${pkgs.stdenv.hostPlatform.system}.starship;
-      nvim = self.packages.${pkgs.stdenv.hostPlatform.system}.neovim;
+      wraps = self.packages.${pkgs.stdenv.hostPlatform.system};
+      inherit (wraps) starship;
+      nvim = wraps.neovim;
     in
     {
       imports = [ wlib.wrapperModules.zsh ];

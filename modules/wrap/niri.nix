@@ -2,8 +2,8 @@
 {
   flake.wrappers.niri = { wlib, pkgs, lib, ... }:
     let
-      system = pkgs.stdenv.hostPlatform.system;
-      inherit (self.packages.${system}) kitty rofi waybar mako hyprlock;
+      wraps = self.packages.${pkgs.stdenv.hostPlatform.system};
+      inherit (wraps) kitty rofi waybar mako hyprlock;
 
       wpctl = lib.getExe' pkgs.wireplumber "wpctl";
       wlCopy = lib.getExe' pkgs.wl-clipboard "wl-copy";

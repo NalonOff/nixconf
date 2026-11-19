@@ -8,7 +8,8 @@
       ...
     }:
     let
-      inherit (self.packages.${pkgs.stdenv.hostPlatform.system}) neovim;
+      wraps = self.packages.${pkgs.stdenv.hostPlatform.system};
+      inherit (wraps) neovim;
     in
     {
       imports = [ wlib.wrapperModules.git ];

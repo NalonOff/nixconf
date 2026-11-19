@@ -3,8 +3,8 @@
   flake.wrappers.waybar =
     { wlib, pkgs, lib, ... }:
     let
-      system = pkgs.stdenv.hostPlatform.system;
-      inherit (self.packages.${system}) rofi hyprlock;
+      wraps = self.packages.${pkgs.stdenv.hostPlatform.system};
+      inherit (wraps) rofi hyprlock;
 
       # Builds a Nerd Font glyph from its hex code point, avoiding invisible
       # characters in the file. Code points outside the BMP (nf-md-*) must be
