@@ -60,7 +60,7 @@
         (import-tree ./modules/wrap)
       ];
 
-      systems = [ "x86_64-linux" ];
+      systems = [ system ];
 
       perSystem = _: {
         _module.args.pkgs = pkgs;
