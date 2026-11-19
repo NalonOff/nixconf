@@ -32,6 +32,12 @@
       system = "x86_64-linux";
       vars = import ./vars.nix;
 
+      # Single nixpkgs instance shared by the wrappers and the system
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+
       mkHost = hostname:
         nixpkgs.lib.nixosSystem {
           inherit system;
@@ -41,7 +47,10 @@
             ./modules/nixos
             disko.nixosModules.disko
             impermanence.nixosModules.impermanence
-            { networking.hostName = hostname; }
+            {
+              networking.hostName = hostname;
+              nixpkgs.pkgs = pkgs;
+            }
           ];
         };
     in
@@ -52,6 +61,11 @@
       ];
 
       systems = [ "x86_64-linux" ];
+
+      perSystem = _: {
+        _module.args.pkgs = pkgs;
+        wrappers.pkgs = pkgs;
+      };
 
       flake.nixosConfigurations = {
         desktop = mkHost "desktop";
