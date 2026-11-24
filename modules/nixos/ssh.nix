@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ lib, ... }:
 {
   # SSH client config (system-wide)
   programs.ssh = {
