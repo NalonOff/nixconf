@@ -14,13 +14,6 @@
 
       mkPref = name: value: ''pref("${name}", ${builtins.toJSON value});'';
 
-      mkEngine = { name, alias, url, icon }: {
-        Name = name;
-        Alias = alias;
-        URLTemplate = url;
-        IconURL = icon;
-      };
-
       prefs = {
         # Native vertical tabs
         "sidebar.verticalTabs" = true;
